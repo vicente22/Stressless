@@ -18,7 +18,7 @@ import cl.vicentepc.stressless.models.Pending;
 
 public class PendingsAdapter extends RecyclerView.Adapter<PendingsAdapter.ViewHolder> {
 
-    private List<Pending> pendings = new Queries().pendings();
+    private List<Pending> pendings = new Queries().done();
 
     private PendingClickListener listener;
 
@@ -88,7 +88,6 @@ public class PendingsAdapter extends RecyclerView.Adapter<PendingsAdapter.ViewHo
     public void update(Pending pending) {
         pendings.add(pending);
         notifyDataSetChanged();
-
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

@@ -1,5 +1,6 @@
 package cl.vicentepc.stressless.views.main;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,10 +18,13 @@ import cl.vicentepc.stressless.PendingClickListener;
 import cl.vicentepc.stressless.R;
 import cl.vicentepc.stressless.adapters.PendingsAdapter;
 import cl.vicentepc.stressless.models.Pending;
+import cl.vicentepc.stressless.views.details.DetailsActivity;
 
 public class PendingsFragment extends Fragment implements PendingClickListener {
 
     private PendingsAdapter adapter;
+
+    public static final String PENDING_ID = "cl.vicentepc.stressless.views.main.KEY.PENDING_ID";
 
     public PendingsFragment() {
     }
@@ -41,15 +45,19 @@ public class PendingsFragment extends Fragment implements PendingClickListener {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        for (int i = 0; i < 20; i++) {
+        /*for (int i = 0; i < 20; i++) {
             Pending pending = new Pending();
             pending.setName(String.valueOf(i));
             pending.setDone(false);
             pending.save();
-        }
+        }*/
 
         adapter = new PendingsAdapter(this);
         recyclerView.setAdapter(adapter);
+
+    }
+
+    public void updateSearch(String name){
 
     }
 
@@ -60,6 +68,11 @@ public class PendingsFragment extends Fragment implements PendingClickListener {
 
     @Override
     public void clickedID(long id) {
-        Toast.makeText(getContext(), String.valueOf(id), Toast.LENGTH_SHORT).show();
+
+        //Toast.makeText(getContext(), String.valueOf(id), Toast.LENGTH_SHORT).show();
+        Intent myIntent = new Intent(getActivity(), DetailsActivity.class);
+        myIntent.putExtra(PENDING_ID, id);
+        startActivity(myIntent);
+
     }
 }
